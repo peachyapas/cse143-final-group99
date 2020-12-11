@@ -1,0 +1,122 @@
+Design Document
+
+Our final design for the application used recursive enumeration and the method was inspired by the travel() section question that we worked on. Most of our design decisions
+was based off of looking at previous examples we worked on. Below is the explanation for the implementation details as well as the reasoning behind our design decisions.
+
+
+Fields:
+    private static List<String> elements;
+	*An array list of strings that contains the elements of the periodic table.
+	*Used to construct the output string.
+	*We wanted to be able to access the index to retrieve the elements so we used a list instead of other collection types.
+
+    private static TreeMap<String, String> periodicTable;
+    *A map that maps the elements symbol of the periodic table with its corresponding element
+	*Used to print out the elements that constructs the word.
+
+    private static List<String> elementsForChecking;
+	*A copy of the elements array list but all elements are put into lower case in order to check if the word could be constructed.
+    private Scanner elementFileScanner;
+	*A file scanner to scan the elements.txt file which contains all the atomic symbols of the elements in order to put them into the
+	array list.
+
+Constructor:
+    public ChemistryMeme(File elementList) throws FileNotFoundException {
+		elements = new ArrayList<String>();
+		periodicTable = new TreeMap<String, String> ();
+		elementFileScanner = new Scanner(elementList);
+    }
+	*Initializes the elements list, the map.
+	*Takes in a file(the elements.txt) for the scanner to scan.
+	*Throws a FileNotFoundException when the given file is not found
+
+Methods:
+    public void createList() {
+		elements.add(elementFileScanner.nextLine());
+		while (elementFileScanner.hasNextLine()) {
+			elements.add(elementFileScanner.nextLine());
+		}
+		elementFileScanner.close();
+		elementsForChecking = listToLowerCase(elements);
+    }
+	*Uses the scanner to scan through each line in the given file and adds it to the elements array list.
+	*Then takes the elements list and calls the listToLowerCase(List<String>) method to initialize the
+	 elementsForChecking list.
+
+    private List<String> listToLowerCase(List<String> list) {
+		List<String> newList = new ArrayList<String>();
+		for (String str : list) {
+			newList.add(str.toLowerCase());
+		}
+		return newList;
+    }
+	*Takes in the given List<String> and returns a list where all the elements have been converted to lowercase.
+
+    public static void elementize(String input) throws IOException {
+		char[] arr = input.toCharArray();
+		System.out.println();
+		System.out.print("All possible combinations: ");
+		elementize(arr, "", 0);
+    }
+	*Takes in a string from System.in to be elementized(constructed out of elements).
+	*Converts the string into an array of characters
+	*Calls the private helper method elementize(char[], String, int);
+
+    private static void elementize(char[] arr, String output, int combinations) {
+		if (arr.length <= 0) {
+			System.out.println("\n");
+			System.out.println("The word can be symbolised as " + output + " using " + combinations + " element(s): ");
+		} else {
+			combinations++;
+			// for two-letter element symbols
+			if (arr.length >= 2 && hasElement(arr, 2)) {
+				String element = returnElement(arr, 2);
+				elementize(truncateArray(arr, 2), output + element, combinations);
+				System.out.print(periodicTable.get(element) + " ");
+			}
+			// for one-letter element symbols
+			if (hasElement(arr, 1)) {
+				String element = returnElement(arr, 1);
+				elementize(truncateArray(arr, 1), output + element, combinations);
+				System.out.print(periodicTable.get(element) + " ");
+			}
+		}
+    }
+	*Recursive enumerizes the given array of characters made from the given string in the public elementize(String) method
+	*Base case is when the given array's length is less than or equal to 0;
+	    *This happens because each time it passes the test(has a working 2 letter or 1 letter element symbol), we truncate
+	     the array based on the length of the used symbol(Ex. if used a 2 letter symbol, remove index 0 and 1 from the array
+	     if used a 1 letter symbol, remove index 0 from the array), this process uses the truncateArray(char[]) method.
+	*Recusively checks for 2 letters symbols and 1 letter symbols, if it passes the logic statement(it has a 2 letter symbol
+	 or a 1 letter symbol the add the symbol to the output string. Also prints out the element of the element symbol. Every time
+	 it goes through the recursive case also add 1 to the combinations to track how many elements are being used.
+	*When it reaches the base case, print out the accumilated output string.
+
+    private static boolean hasElement(char arr[], int end) {
+		String stringToCheck = arrayToString(arr, end);
+		return elementsForChecking.contains(stringToCheck);
+    }
+	*Returns if there is an element in the elements list that corresponds to the given array of characters. Takes in an 
+	 index that marks the index of the array we want to stop at.
+    
+    private static String returnElement(char arr[], int end) {
+		String stringToCheck = arrayToString(arr, end);
+		int index = elementsForChecking.indexOf(stringToCheck);
+		return elements.get(index);
+    }
+	*Returns the atomic symbol of the given array of characters. Takes in an index that marks the index of the array we
+	 want to stop at.
+
+    private static String arrayToString(char arr[], int end) {
+		String stringToCheck = "";
+		for (int i = 0; i < end; i++) {
+			stringToCheck = stringToCheck + arr[i];
+		}
+		return stringToCheck.toLowerCase();
+    }
+	*Returns the given array of characters into a string. Takes in an index that marks the index of the array we want to stop at.
+
+    private static char[] truncateArray(char[] arr, int start) {
+		return Arrays.copyOfRange(arr, start, arr.length);
+    }
+	*Returns the an array that keeps where we want to start(index given) to the end of the array.

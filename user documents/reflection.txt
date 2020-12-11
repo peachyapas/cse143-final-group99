@@ -1,0 +1,27 @@
+Reflection:
+
+What did you learn during this project?
+What did you enjoy during this project?
+What did you find challenging or frustrating during this project?
+What did you find particularly helpful for your learning during this project?
+
+In terms of what we learned during this project, even though we didn't get the server stuff to work, we dabbled with the Server.java to try put
+up a web app and it was interesting to see how java can be used for hosting. One of our members also had to learn how to use github for the first
+time, so they had to learn how to work collaboratively on code. 
+
+When approaching the problem, we also tried to consider every possible method to approach the solution. We initially tried looping through the
+periodic table element's symbols and checking it against the text's substring (and this implementation method can be found in the 'ChemistryMemes.java' file
+in archived folder). However as this method didn't let us enumerate all possible combinations/spelling of the word, we looked at the section coding questions
+and used it as a guiding template to let us recursively enumerate all possible spellings.
+
+We enjoyed revisiting what we learnt in class and using it in a non-assessment context; it always felt like what we learnt in class was too structured so
+it would do something from scratch and this project gave us an exposure as to how to code in java without a given scaffold/structure whatnot. This however
+was also one of the challenges we faced as it was difficult to figure out where to start without any instructions; even though we understood the 'theory'
+behind how it could be implemented it was still difficult to know where to start in terms of code. It was also frustrating to run into bugs and trying to debug them, and
+using stackoverflow as well as looking at past examples we've worked on in class was very helpful in terms of helping us overcome bugs or helping us get started.
+One of our frustrations was working with people across different timezones.
+
+One of the main problem we faced toward the end is getting the Server to work. Since we wrote most of codes within static methods, making us unable to call upon
+them in the server. Furthermore, even though we try to utilizes past assessments, we weren't able to call upon static methods. However, we did learned a lot from
+this process. We were able to create an index which would represent our webpage. Further more we also know now how endpoint for our server would work if we were able
+to call upon the methods.
