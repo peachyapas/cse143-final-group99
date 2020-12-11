@@ -1,7 +1,17 @@
 Design Document
 
-Our final design for the application used recursive enumeration and the method was inspired by the travel() section question that we worked on. Most of our design decisions
-was based off of looking at previous examples we worked on. Below is the explanation for the implementation details as well as the reasoning behind our design decisions.
+Our initial design (ChemistryMemes.java file, which can be found in the archived files folder) was to use a for each loop and 
+go through each element in the periodic table, then get a substring of the input text and see if it matches the element in the periodic table.
+This wasn't the most efficient way and we weren't able to enumerate all possible combinations of the word so we switched to a secondary
+design choice that followed the recursive enumeration method we covered in class and saw in the travel section question. We also wanted make
+a web app but we couldn't figure out how to work with Server.java.
+
+Our final design (ChemistryMeme.java) for the application used recursive enumeration and the method was inspired by the travel() 
+section question that we worked on. Most of our design decisions was based off of looking at previous examples we worked on. We
+also wanted to make sure that the user would be able to keep on playing the game multiple times, so we had a playGame() method that
+let the user keep on playing the game until they enter "no" to exit the game. 
+
+Below is the explanation for the implementation details as well as the reasoning behind our design decisions.
 
 
 Fields:
@@ -120,3 +130,5 @@ Methods:
 		return Arrays.copyOfRange(arr, start, arr.length);
     }
 	*Returns the an array that keeps where we want to start(index given) to the end of the array.
+
+

@@ -2,6 +2,12 @@
 
 This is for [CSE 143's final project](https://courses.cs.washington.edu/courses/cse143/20au/project/#status-report)
 
+This is a console-based application that can be run by typing the command below in terminal. Make sure you're in the root directory.
+
+```java
+javac ChemistryMeme.java && java ChemistryMeme
+```
+
 The user is prompted to enter a word. If the word is spellable using elements from the periodic table, the programme returns all possible 
 combinations of the word spelled using elements from the periodic table, as well as the name of the elements and number of elements that were 
 used to spell the word. For instance, if the user inputs `No`, it'll print `The word can be symbolised as NO using 2 element(s): Nitrogen, Oxygen`
@@ -27,4 +33,3 @@ The design document and reflection text document can be found under the "user do
 
 [//]: <> (The guide should also include a link to a short video no more than 5 minutes long that presents your project to the world with slides, screenshots, voiceover, and/or live action. Your video should somehow include your project title, your names, and any other details that you’d like to convey to viewers. We recommend recording a video through Zoom for ease of screensharing and so that all collaborators can present.)
 
-# cse143-final-group99
